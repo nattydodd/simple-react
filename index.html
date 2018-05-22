@@ -25,11 +25,13 @@
           super();
           this.state = {
             greeting: "Hello",
-            user: ""
+            user: "",
+            list: []
           }
 
           this.updateGreeting = this.updateGreeting.bind(this);
           this.handleChange = this.handleChange.bind(this);
+          this.updateList = this.updateList.bind(this);
         }
 
         updateGreeting() {
@@ -38,9 +40,29 @@
           });
         }
 
+        updateList() {
+          let newList = this.state.list;
+          let newGuest = this.state.user;
+
+          newList.push(newGuest);
+
+          this.setState({
+            list: newList
+          });
+        }
+
         handleChange(e) {
           this.setState({
             user: e.target.value
+          });
+        }
+
+        renderList(list) {
+          // render the list of names
+          return list.map((listItem) => {
+            return (
+              <li>{listItem}</li>
+            )
           });
         }
 
@@ -51,7 +73,13 @@
               <button onClick={this.updateGreeting}>
                 I'm finished!
               </button>
+              <button onClick={this.updateList}>
+                Sign Guestlist
+              </button>
               <input onChange={this.handleChange} />
+              <ul>
+                {this.renderList(this.state.list)}
+              </ul>
             </div>
           )
         }
