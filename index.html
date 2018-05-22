@@ -19,6 +19,12 @@
     <div id="root"></div>
     <script type="text/babel">
 
+      function List(props) {
+        return (
+          <li>{props.number}. {props.name}</li>
+        )
+      }
+
       class Hello extends React.Component {
         constructor() {
           // we need to call super to access "this" in the constructor, otherwise "this" will be undefined
@@ -59,9 +65,9 @@
 
         renderList(list) {
           // render the list of names
-          return list.map((listItem) => {
+          return list.map((listItem, index) => {
             return (
-              <li>{listItem}</li>
+              <List name={listItem} number={index + 1}/>
             )
           });
         }
