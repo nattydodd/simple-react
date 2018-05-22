@@ -24,10 +24,12 @@
           // we need to call super to access "this" in the constructor, otherwise "this" will be undefined
           super();
           this.state = {
-            greeting: "Hello"
+            greeting: "Hello",
+            user: ""
           }
 
           this.updateGreeting = this.updateGreeting.bind(this);
+          this.handleChange = this.handleChange.bind(this);
         }
 
         updateGreeting() {
@@ -36,13 +38,20 @@
           });
         }
 
+        handleChange(e) {
+          this.setState({
+            user: e.target.value
+          });
+        }
+
         render() {
           return (
             <div>
-              <h1>{this.state.greeting} {this.props.name}</h1>
+              <h1>{this.state.greeting} {this.props.name}, this is: {this.state.user}</h1>
               <button onClick={this.updateGreeting}>
                 I'm finished!
               </button>
+              <input onChange={this.handleChange} />
             </div>
           )
         }
