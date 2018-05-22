@@ -20,10 +20,29 @@
     <script type="text/babel">
 
       class Hello extends React.Component {
+        constructor() {
+          // we need to call super to access "this" in the constructor, otherwise "this" will be undefined
+          super();
+          this.state = {
+            greeting: "Hello"
+          }
+
+          this.updateGreeting = this.updateGreeting.bind(this);
+        }
+
+        updateGreeting() {
+          this.setState({
+            greeting: "Goodbye"
+          });
+        }
+
         render() {
           return (
             <div>
-              <h1>Hello {this.props.name}</h1>
+              <h1>{this.state.greeting} {this.props.name}</h1>
+              <button onClick={this.updateGreeting}>
+                I'm finished!
+              </button>
             </div>
           )
         }
